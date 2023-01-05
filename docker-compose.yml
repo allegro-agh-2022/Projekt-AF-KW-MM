@@ -1,0 +1,5 @@
+services:
+  app:
+    build: ./auth
+    ports:
+      - 8080:8080
