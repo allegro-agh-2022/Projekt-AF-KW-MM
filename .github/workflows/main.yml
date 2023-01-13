@@ -22,6 +22,9 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: Check file permissions
+      run: ls -la
+
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
     
