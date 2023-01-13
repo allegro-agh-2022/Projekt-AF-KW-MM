@@ -23,6 +23,7 @@ jobs:
         distribution: 'temurin'
 
     - name: Check file permissions
+      run: cd service1
       run: ls -la
 
     - name: Setup Gradle
