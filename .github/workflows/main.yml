@@ -22,11 +22,11 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Check file permissions
-      run: cd service1 && ls -la
-
+    - name: Change permissions for file
+      run: chmod +x service/gradlew
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
-    
-    - name: Execute Gradle build
-      run: ./service1/gradlew build
+    - name: Build with Gradle
+      with:
+        arguments: build
+        build-root-directory: service1
