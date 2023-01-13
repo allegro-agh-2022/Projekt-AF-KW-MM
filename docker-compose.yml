@@ -5,6 +5,7 @@ services:
     build:
       context: ./api-gateway
     ports:
-      - "8080:8080"
+      - "443:443"
+      - "80:80"
     depends_on:
       - service1
