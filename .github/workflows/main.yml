@@ -24,9 +24,8 @@ jobs:
 
     - name: Change permissions for file
       run: chmod +x service/gradlew
-    - name: Setup Gradle
-      uses: gradle/gradle-build-action@v2
     - name: Build with Gradle
+      uses: gradle/gradle-build-action@v2
       with:
         arguments: build
         build-root-directory: service1
