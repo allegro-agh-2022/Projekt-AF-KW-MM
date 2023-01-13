@@ -9,7 +9,7 @@ apiEndpoints:
     paths: '/'
 serviceEndpoints:
   httpbin:
-    url: 'http://auth:8001'
+    url: 'http://service1:8001'
 policies:
   - basic-auth
   - cors

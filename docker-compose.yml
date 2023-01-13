@@ -1,12 +1,10 @@
 services:
-  auth:
-    build: ./auth
-    ports:
-      - 8000:8001
-  nginx:
+  service1:
+    build: ./service1
+  api-gateway:
     build:
-      context: .
+      context: ./api-gateway
     ports:
       - "8080:8080"
     depends_on:
-      - auth
+      - service1

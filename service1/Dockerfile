@@ -7,5 +7,5 @@ RUN gradle build --stacktrace
 FROM openjdk:17-alpine
 WORKDIR /app
 EXPOSE 8080
-COPY --from=builder /builder/build/libs/auth.jar ./auth.jar
-CMD ["java", "-jar", "auth.jar"]
+COPY --from=builder /builder/build/libs/service1.jar ./app.jar
+CMD ["java", "-jar", "app.jar"]
