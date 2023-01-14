@@ -40,5 +40,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - run: ls && ls service1 && ls service1/build && ls service1/build/libs
+
     - name: Docker compose up
       run: docker compose up
