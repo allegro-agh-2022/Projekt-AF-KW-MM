@@ -37,10 +37,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    needs: build-service1
+
     steps:
     - uses: actions/checkout@v3
-
-    - run: ls service1/build/libs
 
     - name: Docker compose up
       run: docker compose up
