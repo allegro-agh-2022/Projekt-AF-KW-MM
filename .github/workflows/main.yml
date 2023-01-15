@@ -24,6 +24,9 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: Change permissions for file
+      run: chmod +x service1/gradlew
+
     - name: Validate Gradle wrapper
       uses: gradle/wrapper-validation-action@v1
 
