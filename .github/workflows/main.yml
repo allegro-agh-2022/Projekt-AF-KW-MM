@@ -36,6 +36,12 @@ jobs:
         arguments: build
         build-root-directory: service1
 
+    - name: Cache build folder
+      uses: actions/cache@v3
+      with:
+        path: service1/build
+        key: ${{ runner.os }}-build-${{ hashFiles('**/service1.jar') }}
+
   compose-up:
 
     runs-on: ubuntu-latest
@@ -44,9 +50,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - run: ls
-    - run: ls service1
-    - run: ls service1/build
+    - name: Cache build folder
+      uses: actions/cache@v3
+      with:
+        path: service1/build
+        key: ${{ runner.os }}-build-${{ hashFiles('**/service1.jar') }}
     - run: ls service1/build/libs
     - name: Docker compose up
       run: docker compose up -d
