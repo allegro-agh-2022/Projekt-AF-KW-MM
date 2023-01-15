@@ -10,11 +10,8 @@ permissions:
   contents: read
 
 jobs:
-
   build-service1:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
 
@@ -43,11 +40,8 @@ jobs:
         key: ${{ runner.os }}-build-${{ hashFiles('**/service1.jar') }}
 
   compose-up:
-
     runs-on: ubuntu-latest
-
     needs: build-service1
-
     steps:
     - uses: actions/checkout@v3
 
@@ -62,6 +56,7 @@ jobs:
 
   snyk-gradle:
     runs-on: ubuntu-latest
+    needs: build-service1
     steps:
       - uses: actions/checkout@v3
 
