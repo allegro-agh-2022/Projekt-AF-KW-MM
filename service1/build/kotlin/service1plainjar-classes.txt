@@ -1,1 +1,0 @@
-/workspaces/Allegro-Projekt/service1/build/classes/kotlin/main/service1/Application.class:/workspaces/Allegro-Projekt/service1/build/classes/kotlin/main/service1/ApplicationKt.class:/workspaces/Allegro-Projekt/service1/build/classes/kotlin/main/service1/MessageResource.class
