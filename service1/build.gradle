@@ -21,6 +21,7 @@ dependencies {
 	implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
 }
 
 tasks.withType(KotlinCompile) {
@@ -31,4 +32,8 @@ tasks.withType(KotlinCompile) {
 	manifest {
         attributes["Main-Class"] = "com.example.Application"
     }
+}
+
+test {
+    useJUnitPlatform()
 }
