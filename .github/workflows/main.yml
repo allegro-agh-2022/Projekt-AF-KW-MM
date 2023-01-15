@@ -43,10 +43,10 @@ jobs:
     needs: build-service1
 
     steps:
+    - uses: actions/checkout@v3
     - run: ls
     - run: ls service1
     - run: ls service1/build
     - run: ls service1/build/libs
-    - uses: actions/checkout@v3
     - name: Docker compose up
       run: docker compose up -d
