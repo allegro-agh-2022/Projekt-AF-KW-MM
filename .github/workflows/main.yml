@@ -56,10 +56,10 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-docker-
 
-    - name: Build and start the containers
+    - name: Build and push the containers
       run: |
-        docker-compose build
-        docker-compose up -d
+        docker compose build
+        docker compose push
 
   snyk-gradle:
     runs-on: ubuntu-latest

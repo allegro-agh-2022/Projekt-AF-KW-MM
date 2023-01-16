@@ -1,9 +1,11 @@
 services:
   service1:
     build: ./service1
+    image: kerdamon/dwallegro
   api-gateway:
     build:
       context: ./api-gateway
+    image: kerdamon/dwallegro
     ports:
       - "443:443"
       - "80:80"
