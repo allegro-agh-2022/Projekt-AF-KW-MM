@@ -48,8 +48,17 @@ jobs:
         path: service1/build
         key: ${{ runner.os }}-build-${{ hashFiles('**/service1.jar') }}
 
-    - run: docker compose up -d
+    - name: Cache docker layers
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/docker/
+        key: ${{ runner.os }}-docker-${{ hashFiles('**/docker-compose.yml') }}
+        restore-keys: |
+          ${{ runner.os }}-docker-
 
+    - run: docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+    - run: docker compose build
+    - run: docker compose push
 
   snyk-gradle:
     runs-on: ubuntu-latest
