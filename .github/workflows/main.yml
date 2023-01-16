@@ -53,7 +53,8 @@ jobs:
 
   snyk-gradle:
     runs-on: ubuntu-latest
-    security-events: write
+    permissions:
+      security-events: write
     needs: build-service1
 
     steps:
