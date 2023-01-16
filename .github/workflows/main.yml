@@ -54,8 +54,18 @@ jobs:
   snyk-gradle:
     runs-on: ubuntu-latest
     needs: build-service1
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'java' ]
+
     steps:
       - uses: actions/checkout@v3
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: ${{ matrix.language }}
 
       - name: Get build folder from cache
         uses: actions/cache@v3
