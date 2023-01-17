@@ -15,6 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: ls -R
+      - run: cd .github
+      - run: ls
       - uses: ./.github/actions/build-services
 
   compose-up:
