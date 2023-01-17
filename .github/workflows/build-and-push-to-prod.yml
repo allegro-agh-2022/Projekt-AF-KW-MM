@@ -15,7 +15,8 @@ jobs:
         Services: [service1]
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/build-services
+      - name: Build Service ${{ matrix.Services }}
+        uses: ./.github/actions/build-services
         with: 
           name: ${{ matrix.Services }}
 
