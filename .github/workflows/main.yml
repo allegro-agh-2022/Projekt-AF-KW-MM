@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/my-action
+      - uses: ./.github/actions/build-services
 
   compose-up:
     runs-on: ubuntu-latest
