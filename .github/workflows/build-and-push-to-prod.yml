@@ -33,3 +33,24 @@ jobs:
       - run: docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - run: docker compose build
       - run: docker compose push
+
+  pull-and-build-on-VM:
+    runs-on: ubuntu-latest
+    needs: build-images-and-push
+    steps:
+      - uses: actions/checkout@v3
+      - name: Send command to build usign ssh
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USERNAME }}
+          password: ${{ secrets.VM_PASSWORD }}
+          proxy_host: ${{ secrets.VM_PROXY_HOST }}
+          proxy_username: ${{ secrets.VM_USERNAME }}
+          proxy_password: ${{ secrets.VM_PASSWORD }}
+          script: |
+            cd Projekt-AF-KW-MM/
+            git checkout prod
+            git pull
+            docker-compose pull
+            docker-compose up -d
