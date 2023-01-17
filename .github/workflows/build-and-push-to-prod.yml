@@ -29,6 +29,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: service1-build-folder
+          path: service1/build
       - run: docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - run: docker compose build
       - run: docker compose push
