@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: ls .github
+      - run: ls .github/actions
       - run: ls .github/actions/build-services
       - uses: ./.github/actions/build-services
 
