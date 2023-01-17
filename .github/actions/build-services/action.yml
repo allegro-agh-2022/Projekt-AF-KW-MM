@@ -26,7 +26,8 @@ runs:
         arguments: build
         build-root-directory: ${{ inputs.name }}
 
-    - name: Save build folder to use in other jobs
-      uses: ./.github/actions/cache-build-folder
+    - uses: actions/upload-artifact@v3
       with:
-        name: ${{ inputs.name }}
+        name: ${{ inputs.name }}-build-folder
+        path: ${{ inputs.name }}/build/
+
