@@ -1,0 +1,17 @@
+name: 'Cache build folder of Gradle'
+description: 'Cache build folder of service build with Gradle for usage in other jobs'
+
+inputs:
+  name:
+    description: 'Path to the service, that corresponds to its name'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+    - name: Cache build folder
+      uses: actions/cache@v3
+      with:
+        path: ${{ inputs.name }}/build
+        key: ${{ runner.os }}-build-${{ hashFiles('**/service1.jar') }}

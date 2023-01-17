@@ -1,5 +1,10 @@
-name: 'Build services'
-description: 'Build Services with Gradle'
+name: 'Build service'
+description: 'Build Service with Gradle'
+
+inputs:
+  name:
+    description: 'Path to the service, that corresponds to its name'
+    required: true
 
 runs:
   using: "composite"
@@ -19,10 +24,9 @@ runs:
       uses: gradle/gradle-build-action@v2
       with:
         arguments: build
-        build-root-directory: service1
+        build-root-directory: ${{ inputs.name }}
 
-    - name: Cache build folder # to use in other jobs
-      uses: actions/cache@v3
+    - name: Save build folder to use in other jobs
+      uses: ./.github/actions/cache-build-folder
       with:
-        path: service1/build
-        key: ${{ runner.os }}-build-${{ hashFiles('**/service1.jar') }}
+        name: ${{ inputs.name }}

@@ -8,11 +8,26 @@ permissions:
   contents: read
 
 jobs:
-  build-services:
+  build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        Services: [service1]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/build-services
+        with: 
+          name: ${{ matrix.Services }}
+
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      # load build folders from cache
+      - uses: actions/checkout@v3
+      - name: Load build folder
+        uses: ./.github/actions/cache-build-folder
+        with:
+          name: service1
       - run: docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - run: docker compose build
       - run: docker compose push
