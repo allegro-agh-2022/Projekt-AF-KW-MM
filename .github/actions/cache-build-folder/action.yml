@@ -14,4 +14,4 @@ runs:
       uses: actions/cache@v3
       with:
         path: ${{ inputs.name }}/build
-        key: ${{ runner.os }}-build-${{ '**/' + inputs.name + '.jar' }}
+        key: ${{ runner.os }}-build-${{ inputs.name }}
