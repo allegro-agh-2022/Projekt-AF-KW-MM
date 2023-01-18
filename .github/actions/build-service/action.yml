@@ -26,7 +26,7 @@ runs:
         arguments: build -x test
         build-root-directory: services/${{ inputs.name }}
 
-    - run: mkdir -p artifact_temp/services/${{ inputs.name }}/ && cp -p services/${{ inputs.name }}/build/ artifact_temp/services/${{ inputs.name }}/build/
+    - run: mkdir -p artifact_temp/services/${{ inputs.name }}/ && cp -p -r services/${{ inputs.name }}/build/ artifact_temp/services/${{ inputs.name }}/build/
       shell: bash
 
     - uses: actions/upload-artifact@v3
