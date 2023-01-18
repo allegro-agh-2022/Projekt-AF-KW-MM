@@ -27,7 +27,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: Load build folder
         uses: actions/download-artifact@v3
-        with:
-          name: service-build-folder*
+      - run: ls
+      - run: ls/services
+      - run: ls/services/service1
+      - run: ls/services/service1/build
       - run: docker compose build
       - run: docker compose up -d
