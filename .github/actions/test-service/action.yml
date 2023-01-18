@@ -31,11 +31,6 @@ runs:
         arguments: test
         build-root-directory: ${{ inputs.name }}
 
-    - uses: actions/upload-artifact@v3
-      with:
-        name: build-folder-${{ inputs.name }}
-        path: services/service1/build
-
     - name: Save build folder of service ${{ inputs.name }}
       uses: ./.github/actions/save-build
         with:
