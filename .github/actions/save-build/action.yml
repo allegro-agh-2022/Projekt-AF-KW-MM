@@ -3,7 +3,7 @@ description: 'Save build folder of specified service'
 
 inputs:
   name:
-    description: 'Name of service'
+    description: 'Name of the service'
     required: true
 
 runs:
