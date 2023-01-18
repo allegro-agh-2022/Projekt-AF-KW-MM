@@ -27,6 +27,7 @@ runs:
         build-root-directory: services/${{ inputs.name }}
 
     - run: cp -p artifact_temp/services/${{ inputs.name }}/build/ artifact_temp/services/${{ inputs.name }}/build/
+      shell: bash
 
     - uses: actions/upload-artifact@v3
       with:
