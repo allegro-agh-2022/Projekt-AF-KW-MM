@@ -15,7 +15,6 @@ runs:
       uses: actions/download-artifact@v3
       with:
         name: ${{ inputs.name }}-build-folder
-        path: ${{ inputs.name }}/build
 
     - name: Set up JDK 17
       uses: actions/setup-java@v3
@@ -32,8 +31,11 @@ runs:
         arguments: test
         build-root-directory: ${{ inputs.name }}
 
+    - run: cp -p artifact_temp/services/${{ inputs.name }}/build/ artifact_temp/services/${{ inputs.name }}/build/
+
     - uses: actions/upload-artifact@v3
       with:
         name: ${{ inputs.name }}-build-folder
-        path: ${{ inputs.name }}/build/
+        path: artifact_temp
+
 

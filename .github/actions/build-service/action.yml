@@ -26,8 +26,10 @@ runs:
         arguments: build -x test
         build-root-directory: services/${{ inputs.name }}
 
+    - run: cp -p artifact_temp/services/${{ inputs.name }}/build/ artifact_temp/services/${{ inputs.name }}/build/
+
     - uses: actions/upload-artifact@v3
       with:
-        name: build-folder-${{ inputs.name }}
-        path: services/${{ inputs.name }}/build/
+        name: ${{ inputs.name }}-build-folder
+        path: artifact_temp
 
