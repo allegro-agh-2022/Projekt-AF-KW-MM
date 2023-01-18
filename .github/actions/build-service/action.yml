@@ -28,6 +28,6 @@ runs:
 
     - uses: actions/upload-artifact@v3
       with:
-        name: ${{ inputs.name }}-build-folder
+        name: build-folder-${{ inputs.name }}
         path: services/${{ inputs.name }}/build/
 

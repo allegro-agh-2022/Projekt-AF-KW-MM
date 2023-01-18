@@ -28,6 +28,6 @@ jobs:
       - name: Load build folder
         uses: actions/download-artifact@v3
         with:
-          name: service*-build-folder
+          name: service-build-folder*
       - run: docker compose build
       - run: docker compose up -d
