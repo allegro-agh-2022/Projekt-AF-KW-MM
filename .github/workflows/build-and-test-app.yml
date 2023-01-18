@@ -8,6 +8,7 @@ permissions:
   contents: read
 
 jobs:
+
   build-services:
     runs-on: ubuntu-latest
     strategy:
@@ -41,11 +42,10 @@ jobs:
     strategy:
       matrix:
         Services: [service1]
-
     steps:
       - uses: actions/checkout@v3
 
-      - name: Load build folder
+      - name: Load build folders
         uses: actions/download-artifact@v3
         with:
           name: ${{ matrix.Services }}-build-folder
@@ -69,10 +69,7 @@ jobs:
     needs: [ build-services, test-services ]
     steps:
       - uses: actions/checkout@v3
-      - name: Load build folder
-        uses: actions/download-artifact@v3
-        with:
-          name: service1-build-folder
-          path: service1/build    #todo add pattern matching to download build folders from all services
+      - name: Load build folders
+        uses: ./.github/actions/load-builds
       - run: docker compose build
       - run: docker compose up -d

@@ -27,9 +27,5 @@ jobs:
       - uses: actions/checkout@v3
       - name: Load build folders
         uses: ./.github/actions/load-builds
-      - run: ls
-      - run: ls services
-      - run: ls services/service1
-      - run: ls services/service1/build
       - run: docker compose build
       - run: docker compose up -d

@@ -15,6 +15,7 @@ runs:
       uses: actions/download-artifact@v3
       with:
         name: build-folder-${{ inputs.name }}
+        path: services/${{ inputs.name }}/build
 
     - name: Set up JDK 17
       uses: actions/setup-java@v3
@@ -29,7 +30,7 @@ runs:
       uses: gradle/gradle-build-action@v2
       with:
         arguments: test
-        build-root-directory: ${{ inputs.name }}
+        build-root-directory: services/${{ inputs.name }}
 
     - name: Save build folder of service ${{ inputs.name }}
       uses: ./.github/actions/save-build
