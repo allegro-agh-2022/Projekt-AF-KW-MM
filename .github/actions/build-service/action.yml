@@ -24,10 +24,10 @@ runs:
       uses: gradle/gradle-build-action@v2
       with:
         arguments: build -x test
-        build-root-directory: ${{ inputs.name }}
+        build-root-directory: services/${{ inputs.name }}
 
     - uses: actions/upload-artifact@v3
       with:
         name: ${{ inputs.name }}-build-folder
-        path: ${{ inputs.name }}/build/
+        path: services/${{ inputs.name }}/build/
 
