@@ -26,6 +26,11 @@ runs:
         arguments: build -x test
         build-root-directory: services/${{ inputs.name }}
 
+    - run: ls
+    - run: ls services
+    - run: ls services/service1
+    - run: ls services/service1/build
+
     - name: Save build folder of service ${{ inputs.name }}
       uses: ./.github/actions/save-build
       with:
