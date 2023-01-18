@@ -11,6 +11,15 @@ runs:
   steps:
     - uses: actions/checkout@v3
 
+    - run: ls
+      shell: bash
+    - run: ls services
+      shell: bash
+    - run: ls services/service1
+      shell: bash
+    - run: ls services/service1/build
+      shell: bash
+
     - uses: actions/upload-artifact@v3
       with:
         name: build-folder-${{ inputs.name }}
