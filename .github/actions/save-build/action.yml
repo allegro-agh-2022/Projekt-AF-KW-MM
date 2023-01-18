@@ -1,0 +1,17 @@
+name: 'Save build'
+description: 'Save build folder of specified service'
+
+inputs:
+  name:
+    description: 'Name of service'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: build-folder-${{ inputs.name }}
+        path: services/${{ inputs.name }}/build

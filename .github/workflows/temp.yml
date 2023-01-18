@@ -25,9 +25,8 @@ jobs:
     needs: build-services
     steps:
       - uses: actions/checkout@v3
-      - name: Load build folder
-        uses: actions/download-artifact@v3
-      - run: mv build-folder-*/* .
+      - name: Load build folders
+        uses: ./.github/actions/load-builds
       - run: ls
       - run: ls/services
       - run: ls/services/service1
