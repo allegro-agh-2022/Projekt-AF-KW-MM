@@ -2,7 +2,7 @@ name: Build and test project with Gradle and Docker
 
 on:
   push:
-    branches: '**'
+    branches: add-second-service
 
 permissions:
   contents: read
