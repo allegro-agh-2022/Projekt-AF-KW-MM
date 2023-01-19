@@ -3,7 +3,7 @@ description: 'Build Service with Gradle'
 
 inputs:
   name:
-    description: 'Path to the service, that corresponds to its name'
+    description: 'Name of the service'
     required: true
 
 runs:
@@ -24,10 +24,18 @@ runs:
       uses: gradle/gradle-build-action@v2
       with:
         arguments: build -x test
-        build-root-directory: ${{ inputs.name }}
+        build-root-directory: services/${{ inputs.name }}
 
-    - uses: actions/upload-artifact@v3
+    - run: ls
+      shell: bash
+    - run: ls services
+      shell: bash
+    - run: ls services/service1
+      shell: bash
+    - run: ls services/service1/build
+      shell: bash
+
+    - name: Save build folder of service ${{ inputs.name }}
+      uses: ./.github/actions/save-build
       with:
-        name: ${{ inputs.name }}-build-folder
-        path: ${{ inputs.name }}/build/
-
+        name: ${{ inputs.name }}

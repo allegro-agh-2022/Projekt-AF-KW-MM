@@ -1,0 +1,17 @@
+name: 'Load build'
+description: 'Load all build folders, and place them into proper folder of service'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Load build folder of service1
+      uses: actions/download-artifact@v3
+      with:
+        name: build-folder-service1
+        path: services/service1/build
+
+    # - name: Load build folder of service2
+    #   uses: actions/download-artifact@v3
+    #   with:
+    #     name: build-folder-service1
+    #     path: services/service2/build

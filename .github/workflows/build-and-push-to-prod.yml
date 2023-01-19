@@ -25,11 +25,8 @@ jobs:
     needs: build-services
     steps:
       - uses: actions/checkout@v3
-      - name: Load build folder
-        uses: actions/download-artifact@v3
-        with:
-          name: service1-build-folder
-          path: service1/build
+      - name: Load build folders
+        uses: ./.github/actions/load-builds
       - run: docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - run: docker compose build
       - run: docker compose push
