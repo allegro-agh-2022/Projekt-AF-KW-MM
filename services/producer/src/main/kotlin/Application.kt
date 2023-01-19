@@ -16,5 +16,11 @@ fun main(args: Array<String>) {
 @RestController
 class MessageResource {
     @GetMapping("/")
-    fun index(): String = "Hello world from producer service!"
+    fun index(): String = "Hello world from producer index!"
+
+    @GetMapping("/producer/")
+    fun get1(): String = "Hello world form producer of path /producer/"
+
+    @GetMapping("/producer/something/")
+    fun get2(): String = "Hello world form producer of path /producer/something"
 }

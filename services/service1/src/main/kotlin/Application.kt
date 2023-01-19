@@ -16,5 +16,11 @@ fun main(args: Array<String>) {
 @RestController
 class MessageResource {
     @GetMapping("/")
-    fun index(): String = "Hello world!"
+    fun index(): String = "Hello world from service1 index"
+
+    @GetMapping("/service1/")
+    fun get1(): String = "Hello world form service1 of path /service1/"
+
+    @GetMapping("/service1/something/")
+    fun get2(): String = "Hello world form service1 of path /service1/something"
 }

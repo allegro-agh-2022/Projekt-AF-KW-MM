@@ -6,12 +6,17 @@ admin:
   port: 9876
   host: localhost
 apiEndpoints:
-  api:
-    host: localhost
-    paths: '/'
+  api1:
+    host: '*'
+    paths: '/service1/*'
+  api2:
+    host: '*'
+    paths: '/producer/*'
 serviceEndpoints:
-  httpbin:
+  service1:
     url: 'http://service1:8001'
+  producer:
+    url: 'http://producer:8002'
 policies:
   - basic-auth
   - cors
@@ -22,13 +27,23 @@ policies:
   - proxy
   - rate-limit
 pipelines:
-  default:
+  service1:
     apiEndpoints:
-      - api
+      - api1
     policies:
     # Uncomment `key-auth:` when instructed to in the Getting Started guide.
     # - key-auth:
       - proxy:
           - action:
-              serviceEndpoint: httpbin
+              serviceEndpoint: service1
+              changeOrigin: true
+  service2:
+    apiEndpoints:
+      - api2
+    policies:
+    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
+    # - key-auth:
+      - proxy:
+          - action:
+              serviceEndpoint: producer
               changeOrigin: true
