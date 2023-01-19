@@ -48,6 +48,7 @@ jobs:
           script: |
             cd Projekt-AF-KW-MM/
             git checkout prod
-            git pull
+            git fetch --all
+            git reset --hard origin/prod
             docker-compose pull
             docker-compose up -d
