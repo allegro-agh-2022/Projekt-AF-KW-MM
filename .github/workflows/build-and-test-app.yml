@@ -49,6 +49,7 @@ jobs:
         uses: ./.github/actions/snyk-check-service
         with: 
           name: ${{ matrix.Services }}
+          token: ${{ secrets.SNYK_TOKEN_KERDAMON }}
 
   build-images:
     runs-on: ubuntu-latest
