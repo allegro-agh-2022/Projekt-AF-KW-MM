@@ -1,0 +1,32 @@
+name: 'Checks service for vulnerabilities'
+description: 'Checks service for vulnerabilities with Snyk'
+
+inputs:
+  name:
+    description: 'Name of the service'
+    required: true
+  token:
+    description: "Snyk token"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Load build folder
+      uses: actions/download-artifact@v3
+      with:
+        name: build-folder-${{ inputs.name }}
+        path: services/${{ inputs.name }}/build
+
+    - name: Run Snyk to check for vulnerabilities
+      uses: snyk/actions/gradle-jdk17@master
+      continue-on-error: true
+      env:
+        SNYK_TOKEN: ${{ inputs.token }}
+      with:
+        args: services/${{ inputs.name }} --sarif-file-output=snyk.sarif
+
+    - name: Upload result to GitHub Code Scanning
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: snyk.sarif

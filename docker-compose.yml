@@ -1,6 +1,6 @@
 services:
   service1:
-    build: ./service1
+    build: ./services/service1
     image: kerdamon/service1
   api-gateway:
     build:
