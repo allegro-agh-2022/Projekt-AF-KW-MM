@@ -5,6 +5,9 @@ inputs:
   name:
     description: 'Name of the service'
     required: true
+  token:
+    description: "Snyk token"
+    required: true
 
 runs:
   using: "composite"
@@ -19,7 +22,7 @@ runs:
       uses: snyk/actions/gradle-jdk17@master
       continue-on-error: true
       env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN_KERDAMON }}
+        SNYK_TOKEN: ${{ inputs.token }}
       with:
         args: services/${{ inputs.name }} --sarif-file-output=snyk.sarif
 
