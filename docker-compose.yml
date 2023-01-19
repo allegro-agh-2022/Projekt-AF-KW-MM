@@ -2,6 +2,9 @@ services:
   service1:
     build: ./services/service1
     image: kerdamon/service1
+  producer:
+    build: ./services/producer
+    image: kerdamon/producer
   api-gateway:
     build:
       context: ./api-gateway
@@ -11,3 +14,4 @@ services:
       - "80:80"
     depends_on:
       - service1
+      - producer

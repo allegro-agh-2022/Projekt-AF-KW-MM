@@ -1,4 +1,4 @@
-package service1 
+package producer 
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -16,11 +16,11 @@ fun main(args: Array<String>) {
 @RestController
 class MessageResource {
     @GetMapping("/")
-    fun index(): String = "Hello world from service1 index"
+    fun index(): String = "Hello world from producer index!"
 
-    @GetMapping("/service1/")
-    fun get1(): String = "Hello world form service1 of path /service1/"
+    @GetMapping("/producer/")
+    fun get1(): String = "Hello world form producer of path /producer/"
 
-    @GetMapping("/service1/something/")
-    fun get2(): String = "Hello world form service1 of path /service1/something"
+    @GetMapping("/producer/something/")
+    fun get2(): String = "Hello world form producer of path /producer/something"
 }

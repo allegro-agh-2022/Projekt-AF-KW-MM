@@ -10,8 +10,8 @@ runs:
         name: build-folder-service1
         path: services/service1/build
 
-    # - name: Load build folder of service2
-    #   uses: actions/download-artifact@v3
-    #   with:
-    #     name: build-folder-service1
-    #     path: services/service2/build
+    - name: Load build folder of service2
+      uses: actions/download-artifact@v3
+      with:
+        name: build-folder-producer
+        path: services/producer/build
