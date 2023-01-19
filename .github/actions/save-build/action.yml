@@ -9,15 +9,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: ls
-      shell: bash
-    - run: ls services
-      shell: bash
-    - run: ls services/service1
-      shell: bash
-    - run: ls services/service1/build
-      shell: bash
-
     - uses: actions/upload-artifact@v3
       with:
         name: build-folder-${{ inputs.name }}
