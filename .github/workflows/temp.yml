@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        Services: [service1]
+        Services: [service1, producer]
     steps:
       - uses: actions/checkout@v3
       - name: Build Service ${{ matrix.Services }}
