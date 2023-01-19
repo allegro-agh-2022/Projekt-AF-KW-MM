@@ -1,4 +1,4 @@
-package producer-service 
+package producer 
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
