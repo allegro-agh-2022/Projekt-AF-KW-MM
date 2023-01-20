@@ -22,9 +22,9 @@ class MessageResource(val rabbitTemplate: RabbitTemplate) {
     @GetMapping("/")
     fun index(): String = "Index"
 
-    @GetMapping("/producer/")
-    fun get1(): String {
-        rabbitTemplate.convertAndSend("hello", "Stefan")
-        return "Dodaned"
+    @PostMapping("/producer/{name}")
+    fun postPerson(@PathVariable name: String): ResponseEntity<String> {
+        rabbitTemplate.convertAndSend("hello", name)
+        return ResponseEntity.ok(name)
     }
 }
