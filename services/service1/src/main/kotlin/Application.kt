@@ -16,6 +16,12 @@ fun main(args: Array<String>) {
     runApplication<Application>(*args)
 }
 
+@RestController
+class MessageResource() {
+    @GetMapping("/service1/")
+    fun get1(): String = "Hello world form producer of path /producer/"
+}
+
 @Service
 @RabbitListener(queues = ["hello"])
 class RabbitReceiver {

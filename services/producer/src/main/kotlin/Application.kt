@@ -20,14 +20,11 @@ fun main(args: Array<String>) {
 @RestController
 class MessageResource(val rabbitTemplate: RabbitTemplate) {
     @GetMapping("/")
-    fun index(): String = "Hello world from producer index!"
+    fun index(): String = "Index"
 
     @GetMapping("/producer/")
-    fun get1(): String = "Hello world form producer of path /producer/"
-
-    @PostMapping("/person/{name}")
-    fun postPerson(@PathVariable name: String): ResponseEntity<String> {
-        rabbitTemplate.convertAndSend("hello", name)
-        return ResponseEntity.ok(name)
+    fun get1(): String {
+        rabbitTemplate.convertAndSend("hello", "Stefan")
+        return "Dodaned"
     }
 }
