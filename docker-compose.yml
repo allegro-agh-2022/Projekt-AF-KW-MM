@@ -20,6 +20,8 @@ services:
     image: kerdamon/producer
     depends_on:
       - rabbitmq
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
 
   api-gateway:
     build:
