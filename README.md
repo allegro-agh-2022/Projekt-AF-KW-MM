@@ -2,8 +2,9 @@
 
 ## Temp endpoints
 
-/service1/ - hello world from service1
-/producer/ - hello world from producer service
+GET /service1/ - hello world from service1
+GET /producer/ - hello world from producer service
+POST /producer/{name} - send message to queue with content defined by path variable {name}
 
 ## Images Repository
 Built artifacts are pushed to Docker Hub repositories:
