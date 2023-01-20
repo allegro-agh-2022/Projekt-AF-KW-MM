@@ -18,15 +18,15 @@ fun main(args: Array<String>) {
 
 @RestController
 class MessageResource() {
-    @GetMapping("/service1/")
-    fun get1(): String = "Hello world form producer of path /producer/"
+    @GetMapping("/service1")
+    fun hello(): String = "Hello from service 1"
 }
 
 @Service
 @RabbitListener(queues = ["hello"])
 class RabbitReceiver {
     @RabbitHandler
-    fun receive(name: String) {
+    fun receiveFromHello(name: String) {
         println("Received: '$name'")
     }
 }

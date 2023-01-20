@@ -31,8 +31,6 @@ pipelines:
     apiEndpoints:
       - api1
     policies:
-    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
-    # - key-auth:
       - proxy:
           - action:
               serviceEndpoint: service1
@@ -41,8 +39,6 @@ pipelines:
     apiEndpoints:
       - api2
     policies:
-    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
-    # - key-auth:
       - proxy:
           - action:
               serviceEndpoint: producer

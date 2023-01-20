@@ -1,6 +1,11 @@
 # Projekt-AF-KW-MM
 
-## Repository
+## Temp endpoints
+
+/service1/ - hello world from service1
+/producer/ - hello world from producer service
+
+## Images Repository
 Built artifacts are pushed to Docker Hub repositories:
 - [Api gateway](https://hub.docker.com/r/kerdamon/api-gateway)
 - [Service1](https://hub.docker.com/r/kerdamon/service1)

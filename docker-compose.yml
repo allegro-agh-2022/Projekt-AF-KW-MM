@@ -12,8 +12,6 @@ services:
   service1:
     build: ./services/service1
     image: kerdamon/service1
-    ports:
-      - 8001:8001
     depends_on:
       - rabbitmq
     environment:
@@ -22,8 +20,6 @@ services:
   producer:
     build: ./services/producer
     image: kerdamon/producer
-    ports:
-      - 8002:8002
     depends_on:
       - rabbitmq
     environment:
