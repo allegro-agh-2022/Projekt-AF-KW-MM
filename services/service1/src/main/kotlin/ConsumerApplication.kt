@@ -10,14 +10,14 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener
 import org.springframework.stereotype.Service;
 
 @SpringBootApplication
-class Application
+class ConsumerApplication
 
 fun main(args: Array<String>) {
-    runApplication<Application>(*args)
+    runApplication<ConsumerApplication>(*args)
 }
 
 @RestController
-class MessageResource() {
+class HelloController() {
     @GetMapping("/service1")
     fun hello(): String = "Hello from service 1"
 }

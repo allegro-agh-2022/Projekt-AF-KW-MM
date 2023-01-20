@@ -11,14 +11,14 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PathVariable
 
 @SpringBootApplication
-class Application
+class ProducerApplication
 
 fun main(args: Array<String>) {
-    runApplication<Application>(*args)
+    runApplication<ProducerApplication>(*args)
 }
 
 @RestController
-class MessageResource() {
+class HelloController() {
     @GetMapping("/producer")
     fun hello(): String = "Hello from producer"
 }
