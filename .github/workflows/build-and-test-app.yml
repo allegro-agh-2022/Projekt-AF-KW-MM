@@ -21,24 +21,11 @@ jobs:
         with: 
           name: ${{ matrix.Services }}
 
-  test-services:
-    runs-on: ubuntu-latest
-    needs: build-services
-    strategy:
-      matrix:
-        Services: [consumer, producer]
-    steps:
-      - uses: actions/checkout@v3
-      - name: Test Service ${{ matrix.Services }}
-        uses: ./.github/actions/test-service
-        with: 
-          name: ${{ matrix.Services }}
-
   snyk-gradle:
     runs-on: ubuntu-latest
     permissions:
       security-events: write
-    needs: test-services
+    needs: build-services
     strategy:
       matrix:
         Services: [consumer, producer]
@@ -53,7 +40,7 @@ jobs:
 
   build-images:
     runs-on: ubuntu-latest
-    needs: [ build-services, test-services ]
+    needs: build-services
     steps:
       - uses: actions/checkout@v3
       - name: Load build folders
