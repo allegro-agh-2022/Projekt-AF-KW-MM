@@ -1,1 +1,1 @@
-include 'producer', 'service1'
+include 'producer', 'consumer'

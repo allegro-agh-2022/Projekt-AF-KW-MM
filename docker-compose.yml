@@ -9,9 +9,9 @@ services:
     - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
     - ./rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
 
-  service1:
-    build: ./services/service1
-    image: kerdamon/service1
+  consumer:
+    build: ./services/consumer
+    image: kerdamon/consumer
     depends_on:
       - rabbitmq
     environment:
@@ -30,8 +30,8 @@ services:
       context: ./api-gateway
     image: kerdamon/api-gateway
     ports:
-      - "443:443"
+      # - "443:443"
       - "80:80"
     depends_on:
-      - service1
+      - consumer
       - producer

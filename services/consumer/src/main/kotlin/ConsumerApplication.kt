@@ -1,4 +1,4 @@
-package service1 
+package consumer 
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -18,7 +18,7 @@ fun main(args: Array<String>) {
 
 @RestController
 class HelloController() {
-    @GetMapping("/service1/hello")
+    @GetMapping("/consumer/hello")
     fun hello(): String = "Hello from service 1"
 }
 

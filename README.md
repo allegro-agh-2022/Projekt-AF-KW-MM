@@ -7,14 +7,14 @@
 
 ## Temp test endpoints
 
-GET /service1/hello - hello world from service1
+GET /consumer/hello - hello world from consumer
 GET /producer/hello - hello world from producer service
 POST /producer/sendMessage/{name} - send message to queue with content defined by path variable {name}
 
 ## Images Repository
 Built artifacts are pushed to Docker Hub repositories:
 - [Api gateway](https://hub.docker.com/r/kerdamon/api-gateway)
-- [Service1](https://hub.docker.com/r/kerdamon/service1)
+- [Consumer service](https://hub.docker.com/r/kerdamon/consumer)
 - [Producer service](https://hub.docker.com/r/kerdamon/producer)
 
 ## CI/CD
@@ -35,9 +35,9 @@ This workflow is launched when pull request to prod branch is made. It builds se
 2. In service directory create Dockerfile that builds image of this service.
 3. Add service file name to settings.gradle in services directory.
 4. Add service to docker-compose file in root directory.
-5. Add configuration to api gateway.
-6. [CI/CD] Add service name to strategy.matrix.Services in build-services, test-services, and snyk testing in build-and-push-to-prod and build-and-test-app workflows.
-7. [CI/CD] Add loading build folder in load-builds action (.github/actions/load-builds). Just copy one of previous ones and change name.
+5. Add configuration to api gateway (api-gateway/gateway.config.yml).
+6. [CI/CD] Add service name to `strategy.matrix.Services` in `build-services`, `test-services`, and `snyk-radle` jobs in `.github/workflows/build-and-push-to-prod` and `.github/workflows/build-and-test-app` workflows.
+7. [CI/CD] Add loading build folder step in `.github/actions/load-builds/action.yml`. You can just copy one of previous ones and change name.
 
 
 ### Virtual machine with application
