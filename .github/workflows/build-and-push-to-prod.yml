@@ -51,4 +51,4 @@ jobs:
             git fetch --all
             git reset --hard origin/master
             docker-compose pull
-            docker compose up --build -d --remove-orphans
+            docker-compose up --build -d --remove-orphans
