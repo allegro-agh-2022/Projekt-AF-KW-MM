@@ -1,10 +1,10 @@
-package service1
+package consumer
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class DemoApplicationTests {
+class ConsumerApplicationTests {
 
   @Test
   fun contextLoads() {

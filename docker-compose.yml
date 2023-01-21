@@ -1,17 +1,37 @@
 services:
-  service1:
-    build: ./services/service1
-    image: kerdamon/service1
+
+  rabbitmq:
+    image: rabbitmq:3.7-management-alpine
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+    - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
+    - ./rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
+
+  consumer:
+    build: ./services/consumer
+    image: kerdamon/consumer
+    depends_on:
+      - rabbitmq
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
   producer:
     build: ./services/producer
     image: kerdamon/producer
+    depends_on:
+      - rabbitmq
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
   api-gateway:
     build:
       context: ./api-gateway
     image: kerdamon/api-gateway
     ports:
-      - "443:443"
+      # - "443:443"
       - "80:80"
     depends_on:
-      - service1
+      - consumer
       - producer
