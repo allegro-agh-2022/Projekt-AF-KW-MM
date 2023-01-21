@@ -19,13 +19,13 @@ fun main(args: Array<String>) {
 
 @RestController
 class HelloController() {
-    @GetMapping("/producer")
+    @GetMapping("/producer/hello")
     fun hello(): String = "Hello from producer"
 }
 
 @RestController
 class MessageResource(val rabbitTemplate: RabbitTemplate) {
-    @PostMapping("/producer/{name}")
+    @PostMapping("/producer/sendMessage/{name}")
     fun sendMessageToHello(@PathVariable name: String): ResponseEntity<String> {
         rabbitTemplate.convertAndSend("hello", name)
         return ResponseEntity.ok(name)

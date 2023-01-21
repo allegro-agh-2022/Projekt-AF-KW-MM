@@ -18,7 +18,7 @@ fun main(args: Array<String>) {
 
 @RestController
 class HelloController() {
-    @GetMapping("/service1")
+    @GetMapping("/service1/hello")
     fun hello(): String = "Hello from service 1"
 }
 
