@@ -12,11 +12,16 @@ apiEndpoints:
   api2:
     host: '*'
     paths: '/producer/*'
+  api3:
+    host: '*'
+    paths: '/products/*'
 serviceEndpoints:
   consumer:
     url: 'http://consumer:8001'
   producer:
     url: 'http://producer:8002'
+  products:
+    url: 'http://products:8003'
 policies:
   - basic-auth
   - cors
@@ -34,6 +39,14 @@ pipelines:
       - proxy:
           - action:
               serviceEndpoint: consumer
+              changeOrigin: true
+  products:
+    apiEndpoints:
+      - api3
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: products
               changeOrigin: true
   service2:
     apiEndpoints:
