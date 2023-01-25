@@ -15,3 +15,9 @@ runs:
       with:
         name: build-folder-producer
         path: services/producer/build
+
+    - name: Load build folder of products service
+      uses: actions/download-artifact@v3
+      with:
+        name: build-folder-products
+        path: services/products/build

@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        Services: [consumer, producer]
+        Services: [ consumer, producer, products ]
     steps:
       - uses: actions/checkout@v3
       - name: Build Service ${{ matrix.Services }}
@@ -30,7 +30,7 @@ jobs:
     needs: build-services
     strategy:
       matrix:
-        Services: [consumer, producer]
+        Services: [ consumer, producer, products ]
     steps:
       - uses: actions/checkout@v3
       - name: Check Service ${{ matrix.Services }} for vulnerabilities with Snyk
