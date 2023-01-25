@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "59f72dc8-a6c6-4012-b97a-bb39b66950be",
+		"name": "Test endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "14183832-59f72dc8-a6c6-4012-b97a-bb39b66950be"
+	},
+	"item": [
+		{
+			"name": "Test consumer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "13d160fb-5bf0-46ca-aae6-481051a3c6c4",
+						"exec": [
+							"pm.test('Check response is unauthorized', () => {\r",
+							"    pm.response.to.have.status(401);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "41150ba3-fc46-4ae3-8f73-024c6b8132cf",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/consumer/hello",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"consumer",
+						"hello"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test producer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6095c93a-24be-485b-a197-52c193010da2",
+						"exec": [
+							"pm.test('Check response is ok', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "274aace0-cada-42f9-aaeb-7efae2839060",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/producer/hello",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"producer",
+						"hello"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
