@@ -7,6 +7,13 @@ services:
       - POSTGRES_USER=dwallegro-products
       - POSTGRES_PASSWORD=dwallegro-products
 
+  db-users:
+    image: 'postgres:latest'
+    container_name: db-users
+    environment:
+      - POSTGRES_USER=dwallegro-users
+      - POSTGRES_PASSWORD=dwallegro-users
+
   rabbitmq:
     image: rabbitmq:3.7-management-alpine
     ports:
@@ -44,6 +51,18 @@ services:
       - SPRING_DATASOURCE_PASSWORD=dwallegro-products
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
+  auth:
+    build: ./services/auth
+    image: kerdamon/auth
+    depends_on:
+      - db-users
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-users:5432/dwallegro-users
+      - SPRING_DATASOURCE_USERNAME=dwallegro-users
+      - SPRING_DATASOURCE_PASSWORD=dwallegro-users
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
   api-gateway:
     build:
       context: ./api-gateway
@@ -55,3 +74,4 @@ services:
       - consumer
       - producer
       - products
+      - auth
