@@ -13,8 +13,8 @@ services:
       - 5672:5672
       - 15672:15672
     volumes:
-    - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
-    - ./rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
+      - ./rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
 
   consumer:
     build: ./services/consumer
@@ -23,6 +23,7 @@ services:
       - rabbitmq
     environment:
       SPRING_PROFILES_ACTIVE: docker
+
   producer:
     build: ./services/producer
     image: kerdamon/producer
@@ -33,6 +34,7 @@ services:
 
   products:
     build: ./services/products
+    image: kerdamon/products
     depends_on:
       - db
     environment:
