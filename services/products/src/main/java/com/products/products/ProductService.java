@@ -66,4 +66,8 @@ public class ProductService {
         productsRepository.save(product);
         return product;
     }
+
+    public List<Product> getByIdList(List<Long> idList) {
+        return productsRepository.findByIdIn(idList);
+    }
 }

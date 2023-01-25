@@ -21,6 +21,11 @@ public class ProductController {
         return ResponseEntity.ok().body(productService.getProducts());
     }
 
+    @GetMapping("/products/by-id-list")
+    public ResponseEntity<List<Product>> getProducts(@RequestParam List<Long> ids) {
+        return ResponseEntity.ok().body(productService.getByIdList(ids));
+    }
+
     @GetMapping("/products/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable Long id) {
         return ResponseEntity.ok().body(productService.getProductById(id));
