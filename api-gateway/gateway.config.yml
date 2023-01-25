@@ -30,7 +30,7 @@ serviceEndpoints:
   products:
     url: 'http://products:8003'
   orders:
-    url: 'http://products:8004'
+    url: 'http://orders:8004'
 policies:
   - basic-auth
   - cors
