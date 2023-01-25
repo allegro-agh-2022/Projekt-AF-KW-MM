@@ -1,4 +1,3 @@
-
 package com.products.stores;
 
 import org.springframework.data.jpa.repository.JpaRepository;

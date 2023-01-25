@@ -1,5 +1,6 @@
 package com.products.products;
 
+import com.products.categories.ProductCategory;
 import com.products.stores.Store;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,10 @@ public class Product {
     @JoinColumn(name="store_id", nullable=false)
     private Store store;
 
+    @ManyToOne
+    @JoinColumn(name="category_id", nullable=false)
+    private ProductCategory category;
+
     public Product(String name, double price, int stock) {
         this.name = name;
         this.price = price;
@@ -33,20 +38,16 @@ public class Product {
     }
 
     public Product(AddProductDto addProductDto) {
-        this.name = addProductDto.name;
-        this.price = addProductDto.price;
-        this.stock = addProductDto.stock;
+        this.name = addProductDto.getName();
+        this.price = addProductDto.getPrice();
+        this.stock = addProductDto.getStock();
     }
 
     public void applyUpdate(UpdateProductDto update) {
-        this.name = update.name;
-        this.price = update.price;
-        this.stock = update.stock;
-        this.status = update.status;
-    }
-
-    public void setStore(Store store) {
-        this.store = store;
+        this.name = update.getName();
+        this.price = update.getPrice();
+        this.stock = update.getStock();
+        this.status = update.getStatus();
     }
 
     public void addStock(int amount) {

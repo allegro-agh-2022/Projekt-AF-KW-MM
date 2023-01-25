@@ -20,21 +20,20 @@ public class Store {
 
     private String name;
 
-    // TODO: Change ot real user relation
-    private String owner;
+    private Long ownerId;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Product> products = new ArrayList<>();
 
-    public Store(String name, String owner) {
+    public Store(String name, Long ownerId) {
         this.name = name;
-        this.owner = owner;
+        this.ownerId = ownerId;
     }
 
     public Store(StoreDto storeDto) {
       this.name = storeDto.name;
-      this.owner = storeDto.owner;
+      this.ownerId = storeDto.ownerId;
     }
 
     public void addProduct(Product product) {

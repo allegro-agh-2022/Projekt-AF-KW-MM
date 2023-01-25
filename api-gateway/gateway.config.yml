@@ -17,6 +17,7 @@ apiEndpoints:
     paths:
       - '/products*'
       - '/stores*'
+      - '/product-categories*'
   adminAPI:
     host: '*'
     paths: '/admin*'
