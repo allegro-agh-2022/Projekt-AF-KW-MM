@@ -14,7 +14,9 @@ apiEndpoints:
     paths: '/producer/*'
   api3:
     host: '*'
-    paths: '/products/*'
+    paths:
+      - '/products*'
+      - '/stores*'
 serviceEndpoints:
   consumer:
     url: 'http://consumer:8001'
