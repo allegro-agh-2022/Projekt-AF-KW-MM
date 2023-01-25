@@ -8,10 +8,10 @@ admin:
 apiEndpoints:
   api1:
     host: '*'
-    paths: '/consumer/*'
+    paths: '/consumer*'
   api2:
     host: '*'
-    paths: '/producer/*'
+    paths: '/producer*'
   adminAPI:
     host: '*'
     paths: '/admin*'
