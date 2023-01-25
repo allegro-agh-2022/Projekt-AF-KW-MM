@@ -3,7 +3,6 @@ package com.products.categories;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,5 +27,13 @@ public class ProductCategoriesService {
             throw new IllegalStateException("Such product category does not exist");
         }
         return categoryById.get();
+    }
+
+    public ProductCategory getCategoryByName(String name) {
+        Optional<ProductCategory> categoryByName = categoriesRepository.findByName(name);
+        if (categoryByName.isEmpty()) {
+            throw new IllegalStateException("Such product category does not exist");
+        }
+        return categoryByName.get();
     }
 }

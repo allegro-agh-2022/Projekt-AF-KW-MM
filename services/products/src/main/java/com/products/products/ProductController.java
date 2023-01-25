@@ -14,7 +14,10 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts() {
+    public ResponseEntity<List<Product>> getProducts(@RequestParam(required = false) String category) {
+        if (category != null) {
+            return ResponseEntity.ok().body(productService.getProductsByCategory(category));
+        }
         return ResponseEntity.ok().body(productService.getProducts());
     }
 
@@ -28,7 +31,7 @@ public class ProductController {
         return ResponseEntity.ok().body(productService.updateProduct(id, updateProductDto));
     }
 
-    @PutMapping("/products/{id}/stock")
+    @PatchMapping("/products/{id}/stock")
     public ResponseEntity<Product> increaseProductStock(@PathVariable Long id, @RequestBody AddStockDto addStockDto) {
         return ResponseEntity.ok().body(productService.increaseProductStock(id, addStockDto));
     }

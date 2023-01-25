@@ -17,6 +17,7 @@ apiEndpoints:
     paths:
       - '/products*'
       - '/stores*'
+      - '/product-categories*'
 serviceEndpoints:
   consumer:
     url: 'http://consumer:8001'
