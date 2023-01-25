@@ -3,6 +3,8 @@ name: Build and test project with Gradle and Docker
 on:
   pull_request:
     branches: [ "master" ]
+  push:
+    branches: [ "add-postman-api-tests" ]
 
 permissions:
   contents: read
@@ -31,7 +33,6 @@ jobs:
         Services: [consumer, producer]
     steps:
       - uses: actions/checkout@v3
-
       - name: Check Service ${{ matrix.Services }} for vulnerabilities with Snyk
         uses: ./.github/actions/snyk-check-service
         with: 
@@ -47,3 +48,16 @@ jobs:
         uses: ./.github/actions/load-builds
       - run: docker compose build
       - run: docker compose up -d
+
+  test-postman:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Postman CLI
+        run: |
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+      - name: Login to Postman CLI
+        run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+      - name: Run API tests
+        run: |
+          postman collection run "${{ github.workspace }}/postman/collections/Test endpoints.json" --integration-id "131724-${{ github.run_id }}"
