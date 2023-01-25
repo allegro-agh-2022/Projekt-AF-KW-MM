@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "13a2e3ff-aa4c-4bce-90f7-39bdfcc2d5c0",
-		"name": "Gateway Admin",
+		"name": "gateway-admin",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "14183832-13a2e3ff-aa4c-4bce-90f7-39bdfcc2d5c0"
 	},

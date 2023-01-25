@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "fb1b445c-2833-497b-8a11-6253ea250c9e",
-		"name": "OAuth",
+		"name": "oauth",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "14183832-fb1b445c-2833-497b-8a11-6253ea250c9e"
 	},

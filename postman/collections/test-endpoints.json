@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "59f72dc8-a6c6-4012-b97a-bb39b66950be",
-		"name": "Test endpoints",
+		"name": "test-endpoints",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "14183832-59f72dc8-a6c6-4012-b97a-bb39b66950be"
 	},
@@ -77,6 +77,36 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "f25ae511-6098-4f4a-86e4-e09c64f9cc02",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b2e58948-e052-4504-a851-0f0bc1292278",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "c0973eb5-1aa9-4038-a8f4-218b3e5d04d2",
+			"key": "base-url",
+			"value": "http://localhost",
+			"type": "string"
 		}
 	]
 }
