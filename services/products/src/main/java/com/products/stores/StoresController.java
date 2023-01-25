@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import com.products.products.ProductDto;
+import com.products.products.AddProductDto;
 
 @RestController
 @RequiredArgsConstructor
@@ -45,8 +45,8 @@ public class StoresController {
     @PostMapping("/stores/{id}/products")
     public ResponseEntity<Product> createStore(
       @PathVariable Long id,
-      @RequestBody ProductDto productDto
+      @RequestBody AddProductDto addProductDto
     ) {
-        return ResponseEntity.status(201).body(storesService.addProductToStore(id, productDto));
+        return ResponseEntity.status(201).body(storesService.addProductToStore(id, addProductDto));
     }
 }

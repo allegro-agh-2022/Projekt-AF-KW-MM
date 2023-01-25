@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import com.products.products.ProductDto;
+import com.products.products.AddProductDto;
 
 @Service
 @RequiredArgsConstructor
@@ -41,13 +41,13 @@ public class StoresService {
       return productService.getProductsByStoreId(storeId);
     }
 
-    public Product addProductToStore(Long storeId, ProductDto productDto) {
+    public Product addProductToStore(Long storeId, AddProductDto addProductDto) {
         Optional<Store> storeById = storesRepository.findById(storeId);
         if(storeById.isEmpty()){
             throw new IllegalStateException("No such store");
         }
         Store store = storeById.get();
-        Product product = productService.addProductToStore(store, productDto);
+        Product product = productService.addProductToStore(store, addProductDto);
 
         store.addProduct(product);
         storesRepository.save(store);

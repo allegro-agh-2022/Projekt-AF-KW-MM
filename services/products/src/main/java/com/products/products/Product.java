@@ -1,13 +1,7 @@
 package com.products.products;
 
 import com.products.stores.Store;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 
@@ -26,6 +20,8 @@ public class Product {
 
     private int stock;
 
+    private String status = "ACTIVE";
+
     @ManyToOne
     @JoinColumn(name="store_id", nullable=false)
     private Store store;
@@ -36,14 +32,33 @@ public class Product {
         this.stock = stock;
     }
 
-    public Product(ProductDto productDto) {
-        this.name = productDto.name;
-        this.price = productDto.price;
-        this.stock = productDto.stock;
+    public Product(AddProductDto addProductDto) {
+        this.name = addProductDto.name;
+        this.price = addProductDto.price;
+        this.stock = addProductDto.stock;
+    }
+
+    public void applyUpdate(UpdateProductDto update) {
+        this.name = update.name;
+        this.price = update.price;
+        this.stock = update.stock;
+        this.status = update.status;
     }
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public void addStock(int amount) {
+        this.stock += amount;
+    }
+
+    public void activate() {
+        this.status = "ACTIVE";
+    }
+
+    public void deactivate() {
+        this.status = "INACTIVE";
     }
 }
 
