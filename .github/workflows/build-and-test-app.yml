@@ -61,4 +61,6 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API tests
         run: |
-          postman collection run "${{ github.workspace }}/postman/collections/Test endpoints.json" --integration-id "131724-${{ github.run_id }}"
+          postman collection run "${{ github.workspace }}/postman/collections/gateway-admin.json" -e "14183832-11eae767-923a-4e4f-b377-2bffd160f7f0" --integration-id "131724-${{ github.run_id }}"
+          postman collection run "${{ github.workspace }}/postman/collections/oauth.json" -e "14183832-11eae767-923a-4e4f-b377-2bffd160f7f0" --integration-id "131724-${{ github.run_id }}"
+          postman collection run "${{ github.workspace }}/postman/collections/test-endpoints.json" -e "14183832-11eae767-923a-4e4f-b377-2bffd160f7f0" --integration-id "131724-${{ github.run_id }}"
