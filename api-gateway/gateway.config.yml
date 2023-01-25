@@ -12,6 +12,11 @@ apiEndpoints:
   api2:
     host: '*'
     paths: '/producer*'
+  api3:
+    host: '*'
+    paths:
+      - '/products*'
+      - '/stores*'
   adminAPI:
     host: '*'
     paths: '/admin*'
@@ -20,6 +25,8 @@ serviceEndpoints:
     url: 'http://consumer:8001'
   producer:
     url: 'http://producer:8002'
+  products:
+    url: 'http://products:8003'
   adminBackend:
     url: 'http://localhost:9876'
 policies:
@@ -40,6 +47,14 @@ pipelines:
       - proxy:
           - action:
               serviceEndpoint: consumer
+              changeOrigin: true
+  products:
+    apiEndpoints:
+      - api3
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: products
               changeOrigin: true
   producer:
     apiEndpoints:
