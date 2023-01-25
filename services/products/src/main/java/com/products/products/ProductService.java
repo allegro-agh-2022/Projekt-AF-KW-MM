@@ -7,16 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.products.stores.Store;
+
 @Service
 @RequiredArgsConstructor
 public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public Product addProduct(ProductDto productDto) {
-        Product product = new Product("Dupa", 123.12);
+    public Product addProductToStore(Store store, ProductDto productDto) {
+        Product product = new Product(productDto);
+        product.setStore(store);
         productRepository.save(product);
-
         return product;
     }
 
@@ -26,5 +28,9 @@ public class ProductService {
 
     public Optional<Product> getProductById(Long id) {
         return productRepository.findById(id);
+    }
+
+    public List<Product> getProductsByStoreId(Long storeId) {
+        return productRepository.findAllByStoreId(storeId);
     }
 }

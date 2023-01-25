@@ -23,7 +23,7 @@ public class ProductController {
         return ResponseEntity.ok().body("Java jak ja Cię nienawidzę...");
     }
 
-    @GetMapping("/products/kutas")
+    @GetMapping("/products")
     public ResponseEntity<List<Product>> getProducts() {
         return ResponseEntity.ok().body(productService.getProducts());
     }
@@ -32,15 +32,4 @@ public class ProductController {
     public ResponseEntity<Optional<Product>> getProduct(@PathVariable Long id){
         return ResponseEntity.ok().body(productService.getProductById(id));
     }
-
-    @PostMapping("/products/cipa")
-    public ResponseEntity<Product> addProduct(@RequestBody ProductDto productDto ){
-        return ResponseEntity.ok().body(productService.addProduct(productDto));
-    }
-}
-
-@Data
-class ProductDto {
-    private String name;
-    private double price;
 }
