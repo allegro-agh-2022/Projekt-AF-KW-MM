@@ -18,6 +18,10 @@ apiEndpoints:
       - '/products*'
       - '/stores*'
       - '/product-categories*'
+  api4:
+    host: '*'
+    paths:
+      - '/orders*'
 serviceEndpoints:
   consumer:
     url: 'http://consumer:8001'
@@ -25,6 +29,8 @@ serviceEndpoints:
     url: 'http://producer:8002'
   products:
     url: 'http://products:8003'
+  orders:
+    url: 'http://products:8004'
 policies:
   - basic-auth
   - cors
@@ -50,6 +56,14 @@ pipelines:
       - proxy:
           - action:
               serviceEndpoint: products
+              changeOrigin: true
+  orders:
+    apiEndpoints:
+      - api4
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: orders
               changeOrigin: true
   service2:
     apiEndpoints:

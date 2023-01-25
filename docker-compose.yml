@@ -44,6 +44,17 @@ services:
       - SPRING_DATASOURCE_PASSWORD=dwallegro-products
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
+  orders:
+    build: ./services/orders
+    depends_on:
+      - db
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/allegro
+      - SPRING_DATASOURCE_USERNAME=allegro
+      - SPRING_DATASOURCE_PASSWORD=allegro
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
   api-gateway:
     build:
       context: ./api-gateway
@@ -55,3 +66,4 @@ services:
       - consumer
       - producer
       - products
+      - orders
