@@ -32,7 +32,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"username\": \"{{username}}\",\r\n  \"firstname\": \"Stefan\",\r\n  \"lastname\": \"Admin\",\r\n  \"email\": \"adming@example.com\",\r\n  \"redirectUri\": \"http://example.com\"\r\n}",
+					"raw": "{\r\n  \"username\": \"{{gateway-username}}\",\r\n  \"firstname\": \"Stefan\",\r\n  \"lastname\": \"Admin\",\r\n  \"email\": \"adming@example.com\",\r\n  \"redirectUri\": \"http://example.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -78,7 +78,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"consumerId\": \"{{username}}\",\r\n  \"type\": \"oauth2\"\r\n}\r\n",
+					"raw": "{\r\n  \"consumerId\": \"{{gateway-username}}\",\r\n  \"type\": \"oauth2\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -124,7 +124,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"consumerId\": \"{{username}}\",\r\n  \"type\": \"basic-auth\"\r\n}\r\n",
+					"raw": "{\r\n  \"consumerId\": \"{{gateway-username}}\",\r\n  \"type\": \"basic-auth\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -171,7 +171,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"userId\": \"{{username}}\",\r\n  \"name\": \"{{app-name}}\",\r\n  \"redirectUri\": \"{{redirect_uri}}\"\r\n}",
+					"raw": "{\r\n  \"userId\": \"{{gateway-username}}\",\r\n  \"name\": \"{{app-name}}\",\r\n  \"redirectUri\": \"{{redirect_uri}}\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
