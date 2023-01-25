@@ -1,17 +1,57 @@
 services:
-  service1:
-    build: ./services/service1
-    image: kerdamon/service1
+
+  db:
+    image: 'postgres:latest'
+    container_name: db
+    environment:
+      - POSTGRES_USER=allegro
+      - POSTGRES_PASSWORD=allegro
+
+  rabbitmq:
+    image: rabbitmq:3.7-management-alpine
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
+      - ./rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
+
+  consumer:
+    build: ./services/consumer
+    image: kerdamon/consumer
+    depends_on:
+      - rabbitmq
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
   producer:
     build: ./services/producer
     image: kerdamon/producer
+    depends_on:
+      - rabbitmq
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
+  products:
+    build: ./services/products
+    image: kerdamon/products
+    depends_on:
+      - db
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/allegro
+      - SPRING_DATASOURCE_USERNAME=allegro
+      - SPRING_DATASOURCE_PASSWORD=allegro
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
   api-gateway:
     build:
       context: ./api-gateway
     image: kerdamon/api-gateway
     ports:
-      - "443:443"
+      # - "443:443"
       - "80:80"
     depends_on:
-      - service1
+      - consumer
       - producer
+      - products

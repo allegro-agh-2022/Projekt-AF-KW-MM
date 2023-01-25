@@ -4,14 +4,20 @@ description: 'Load all build folders, and place them into proper folder of servi
 runs:
   using: "composite"
   steps:
-    - name: Load build folder of service1
+    - name: Load build folder of consumer service
       uses: actions/download-artifact@v3
       with:
-        name: build-folder-service1
-        path: services/service1/build
+        name: build-folder-consumer
+        path: services/consumer/build
 
-    - name: Load build folder of service2
+    - name: Load build folder of producer service
       uses: actions/download-artifact@v3
       with:
         name: build-folder-producer
         path: services/producer/build
+
+    - name: Load build folder of products service
+      uses: actions/download-artifact@v3
+      with:
+        name: build-folder-products
+        path: services/products/build

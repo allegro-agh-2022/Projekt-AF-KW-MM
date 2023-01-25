@@ -1,22 +1,29 @@
 http:
   port: 80
-https:
-  port: 443
+# https:
+#   port: 443
 admin:
   port: 9876
   host: localhost
 apiEndpoints:
   api1:
     host: '*'
-    paths: '/service1/*'
+    paths: '/consumer*'
   api2:
     host: '*'
-    paths: '/producer/*'
+    paths: '/producer*'
+  api3:
+    host: '*'
+    paths:
+      - '/products*'
+      - '/stores*'
 serviceEndpoints:
-  service1:
-    url: 'http://service1:8001'
+  consumer:
+    url: 'http://consumer:8001'
   producer:
     url: 'http://producer:8002'
+  products:
+    url: 'http://products:8003'
 policies:
   - basic-auth
   - cors
@@ -27,22 +34,26 @@ policies:
   - proxy
   - rate-limit
 pipelines:
-  service1:
+  consumer:
     apiEndpoints:
       - api1
     policies:
-    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
-    # - key-auth:
       - proxy:
           - action:
-              serviceEndpoint: service1
+              serviceEndpoint: consumer
+              changeOrigin: true
+  products:
+    apiEndpoints:
+      - api3
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: products
               changeOrigin: true
   service2:
     apiEndpoints:
       - api2
     policies:
-    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
-    # - key-auth:
       - proxy:
           - action:
               serviceEndpoint: producer

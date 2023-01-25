@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        Services: [service1, producer]
+        Services: [ consumer, producer, products ]
     steps:
       - uses: actions/checkout@v3
       - name: Build Service ${{ matrix.Services }}
@@ -47,8 +47,8 @@ jobs:
           proxy_password: ${{ secrets.VM_PASSWORD }}
           script: |
             cd Projekt-AF-KW-MM/
-            git checkout prod
+            git checkout master
             git fetch --all
-            git reset --hard origin/prod
+            git reset --hard origin/master
             docker-compose pull
-            docker-compose up -d
+            docker-compose up -d --remove-orphans
