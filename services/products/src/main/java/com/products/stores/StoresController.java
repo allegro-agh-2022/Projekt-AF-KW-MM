@@ -1,16 +1,13 @@
 package com.products.stores;
 
+import com.products.products.Product;
 import lombok.RequiredArgsConstructor;
 import java.util.Optional;
-import lombok.Data;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 
-import com.products.products.Product;
 import com.products.products.ProductDto;
 
 @RestController

@@ -1,14 +1,14 @@
 package com.products.stores;
 
+import com.products.products.Product;
+import com.products.products.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.products.products.Product;
 import com.products.products.ProductDto;
-import com.products.products.ProductService;
 
 @Service
 @RequiredArgsConstructor
@@ -46,7 +46,7 @@ public class StoresService {
         if(storeById.isEmpty()){
             throw new IllegalStateException("No such store");
         }
-        Store store = stostoreByIdre.get();
+        Store store = storeById.get();
         Product product = productService.addProductToStore(store, productDto);
 
         store.addProduct(product);

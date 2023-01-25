@@ -1,12 +1,12 @@
-package com.products;
+package com.products.products;
 
+import com.products.stores.Store;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Table;
 import lombok.NoArgsConstructor;
 import lombok.Data;
@@ -34,6 +34,12 @@ public class Product {
         this.name = name;
         this.price = price;
         this.stock = stock;
+    }
+
+    public Product(ProductDto productDto) {
+        this.name = productDto.name;
+        this.price = productDto.price;
+        this.stock = productDto.stock;
     }
 
     public void setStore(Store store) {
