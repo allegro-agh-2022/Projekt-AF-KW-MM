@@ -5,6 +5,8 @@ id = 0f743b50-84a1-4a8f-a038-0c0a643f0a79
 
 [relations.collections]
 rootDirectory = postman/collections
+files[] = {"id":"14183832-13a2e3ff-aa4c-4bce-90f7-39bdfcc2d5c0","path":"Gateway Admin.json","metaData":{}}
+files[] = {"id":"14183832-fb1b445c-2833-497b-8a11-6253ea250c9e","path":"OAuth.json","metaData":{}}
 files[] = {"id":"14183832-59f72dc8-a6c6-4012-b97a-bb39b66950be","path":"Test endpoints.json","metaData":{}}
 
 [relations.collections.metaData]
