@@ -33,7 +33,14 @@
   "policies": [],
   "queues": [
     {
-      "name": "hello",
+      "name": "order_status_changed",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "product_reviewed",
       "vhost": "/",
       "durable": true,
       "auto_delete": false,

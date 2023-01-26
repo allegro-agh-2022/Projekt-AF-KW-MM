@@ -16,17 +16,17 @@ services:
       - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
       - ./rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
 
-  consumer:
-    build: ./services/consumer
-    image: kerdamon/consumer
+  producer:
+    build: ./services/producer
+    image: kerdamon/producer
     depends_on:
       - rabbitmq
     environment:
       SPRING_PROFILES_ACTIVE: docker
 
-  producer:
-    build: ./services/producer
-    image: kerdamon/producer
+  mailer:
+    build: ./services/mailer
+    image: kerdamon/mailer
     depends_on:
       - rabbitmq
     environment:
@@ -52,6 +52,5 @@ services:
       # - "443:443"
       - "80:80"
     depends_on:
-      - consumer
       - producer
       - products
