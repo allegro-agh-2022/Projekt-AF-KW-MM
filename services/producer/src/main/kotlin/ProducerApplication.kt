@@ -25,9 +25,9 @@ class HelloController() {
 
 @RestController
 class MessageResource(val rabbitTemplate: RabbitTemplate) {
-    @PostMapping("/producer/sendMessage/{name}")
+    @GetMapping("/producer/sendMessage/{name}")
     fun sendMessageToHello(@PathVariable name: String): ResponseEntity<String> {
-        rabbitTemplate.convertAndSend("hello", name)
+        rabbitTemplate.convertAndSend("order_status_changed", name)
         return ResponseEntity.ok(name)
     }
 }

@@ -32,6 +32,14 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: docker
 
+  mailer:
+    build: ./services/mailer
+    image: kerdamon/mailer
+    depends_on:
+      - rabbitmq
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
   products:
     build: ./services/products
     image: kerdamon/products
