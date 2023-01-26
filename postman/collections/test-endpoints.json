@@ -7,58 +7,73 @@
 	},
 	"item": [
 		{
-			"name": "Test consumer",
+			"name": "create-store",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "13d160fb-5bf0-46ca-aae6-481051a3c6c4",
+						"id": "28cf97bb-d6d0-4a64-b83b-262de7812f29",
 						"exec": [
-							"pm.test('Check response is unauthorized', () => {\r",
-							"    pm.response.to.have.status(401);\r",
-							"})"
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.environment.set(\"store-id-runtime\", pm.response.json().id);\r",
+							"postman.setNextRequest('get-store')"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
-			"id": "41150ba3-fc46-4ae3-8f73-024c6b8132cf",
+			"id": "185a04cd-35c1-494a-af00-d64a4b182a2f",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"SuperSklep_1\",\r\n    \"owner\": \"Maciek\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{base-url}}/consumer/hello",
+					"raw": "{{base-url}}/{{stores-api-endpoint}}",
 					"host": [
 						"{{base-url}}"
 					],
 					"path": [
-						"consumer",
-						"hello"
+						"{{stores-api-endpoint}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Test producer",
+			"name": "get-store",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "6095c93a-24be-485b-a197-52c193010da2",
+						"id": "d757875b-fe87-4e54-81a2-5c9156d48c88",
 						"exec": [
-							"pm.test('Check response is ok', () => {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
-							"})"
+							"});\r",
+							"pm.test(\"Check returned id is equal to\" + postman.getEnvironmentVariable('store-id-runtime'), function () {\r",
+							"    const responseJson = pm.response.json()\r",
+							"    pm.expect(responseJson.id).to.eql(postman.getEnvironmentVariable('store-id-runtime'))\r",
+							"});\r",
+							"postman.setNextRequest('create-category')"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
-			"id": "274aace0-cada-42f9-aaeb-7efae2839060",
+			"id": "7ee9c203-f39e-4b15-a8e7-365e28918444",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -66,13 +81,314 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base-url}}/producer/hello",
+					"raw": "{{base-url}}/{{stores-api-endpoint}}/{{store-id-runtime}}",
 					"host": [
 						"{{base-url}}"
 					],
 					"path": [
-						"producer",
-						"hello"
+						"{{stores-api-endpoint}}",
+						"{{store-id-runtime}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-category",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dfde84d0-78f8-4b97-8347-8ff93476dd94",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.environment.set(\"category-id-runtime\", pm.response.json().id);\r",
+							"postman.setNextRequest('get-categories')"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "a5845379-60e2-4d4a-9c8b-6774c257711a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"AGD\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/{{product-categories-api-endpoint}}",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"{{product-categories-api-endpoint}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-categories",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b985e85-c042-4380-8c41-9b02a0626af6",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Check returned id equal to \" + postman.getEnvironmentVariable('category-id-runtime'), function () {\r",
+							"    const responseJson = pm.response.json()\r",
+							"    pm.expect(responseJson.id).to.eql(postman.getEnvironmentVariable('category-id-runtime'))\r",
+							"});\r",
+							"postman.setNextRequest('add-product-to-store')"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "7df033d2-c3a6-49f9-a9cf-db5584fc1856",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/{{product-categories-api-endpoint}}/{{category-id-runtime}}",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"{{product-categories-api-endpoint}}",
+						"{{category-id-runtime}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-product-to-store",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3fa12fb4-dcc2-44b6-95e3-f5d8a4d6cd8e",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.environment.set(\"product-id-runtime\", pm.response.json().id);\r",
+							"postman.setNextRequest('get-store-products')"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "c4d6549a-86f4-435e-ab86-07e98c20b23c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Klocki\",\r\n    \"price\": 199.99,\r\n    \"stock\": 12,\r\n    \"categoryId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/{{stores-api-endpoint}}/{{store-id-runtime}}/products",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"{{stores-api-endpoint}}",
+						"{{store-id-runtime}}",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-store-products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "61ff8d3d-4321-4287-bd72-e83746d85d67",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Check if returned list has lenght equal to 1\", function () {\r",
+							"    const responseJson = pm.response.json()\r",
+							"    pm.expect(responseJson).to.have.lengthOf(1)\r",
+							"});\r",
+							"postman.setNextRequest('get-product-by-id')"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "dcda5fd3-25b0-4628-a4a9-0e86ddd9724f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/{{stores-api-endpoint}}/{{store-id-runtime}}/products",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"{{stores-api-endpoint}}",
+						"{{store-id-runtime}}",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-product-by-id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2d6e627b-4e6e-481f-b952-dc2cff4e6f92",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Check returned id equal to \" + postman.getEnvironmentVariable('product-id-runtime'), function () {\r",
+							"    const responseJson = pm.response.json()\r",
+							"    pm.expect(responseJson.id).to.eql(postman.getEnvironmentVariable('product-id-runtime'))\r",
+							"});\r",
+							"postman.setNextRequest('delete-store')"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "b835c14d-e48e-48bb-b5b3-cd32ee97d8d9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/{{products-api-endpoint}}/{{product-id-runtime}}",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"{{products-api-endpoint}}",
+						"{{product-id-runtime}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-store",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "39e012dc-32f8-438e-b025-198631ad0aa1",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Returned true\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.true;\r",
+							"});\r",
+							"postman.setNextRequest('get-store-products-after-delete')"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "aabc624f-b872-4e5e-a6c9-ace346048591",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/{{stores-api-endpoint}}/{{store-id-runtime}}",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"{{stores-api-endpoint}}",
+						"{{store-id-runtime}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-store-products-after-delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "61ff8d3d-4321-4287-bd72-e83746d85d67",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Check if returned list is empty\", function () {\r",
+							"    const responseJson = pm.response.json()\r",
+							"    pm.expect(responseJson).to.have.lengthOf(0)\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "796493c8-a159-49ef-955b-41f851ae599f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/{{stores-api-endpoint}}/{{store-id-runtime}}/products",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"{{stores-api-endpoint}}",
+						"{{store-id-runtime}}",
+						"products"
 					]
 				}
 			},
