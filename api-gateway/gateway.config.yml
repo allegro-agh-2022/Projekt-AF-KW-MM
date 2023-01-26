@@ -59,6 +59,7 @@ pipelines:
     apiEndpoints:
       - api3
     policies:
+      - oauth2:
       - proxy:
           - action:
               serviceEndpoint: products
@@ -67,6 +68,7 @@ pipelines:
     apiEndpoints:
       - api4
     policies:
+      - oauth2:
       - proxy:
           - action:
               serviceEndpoint: orders
@@ -75,6 +77,7 @@ pipelines:
     apiEndpoints:
       - api2
     policies:
+      - oauth2:
       - proxy:
           - action:
               serviceEndpoint: producer
