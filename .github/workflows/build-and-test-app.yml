@@ -3,6 +3,8 @@ name: Build and test project with Gradle and Docker
 on:
   pull_request:
     branches: [ "master" ]
+  push:
+    branches: [ "add-postman-api-tests" ]
 
 permissions:
   contents: read
@@ -31,14 +33,13 @@ jobs:
         Services: [ consumer, producer, products ]
     steps:
       - uses: actions/checkout@v3
-
       - name: Check Service ${{ matrix.Services }} for vulnerabilities with Snyk
         uses: ./.github/actions/snyk-check-service
         with: 
           name: ${{ matrix.Services }}
           token: ${{ secrets.SNYK_TOKEN_KERDAMON }}
 
-  build-images:
+  build-images-and-push:
     runs-on: ubuntu-latest
     needs: build-services
     steps:
@@ -47,3 +48,21 @@ jobs:
         uses: ./.github/actions/load-builds
       - run: docker compose build
       - run: docker compose up -d
+      - run: docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - run: docker compose push
+
+  test-postman:
+    runs-on: ubuntu-latest
+    needs: build-images-and-push
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker compose pull
+      - run: docker compose up -d
+      - name: Install Postman CLI
+        run: |
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+      - name: Login to Postman CLI
+        run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+      - name: Run API tests
+        run: |
+          postman collection run "${{ github.workspace }}/postman/collections/test-endpoints.json" -e "14183832-11eae767-923a-4e4f-b377-2bffd160f7f0" --integration-id "131724-${{ github.run_id }}"
