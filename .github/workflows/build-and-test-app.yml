@@ -52,7 +52,7 @@ jobs:
 
   test-postman:
     runs-on: ubuntu-latest
-    needs: build-images
+    needs: build-images-and-push
     steps:
       - uses: actions/checkout@v3
       - run: docker compose pull
