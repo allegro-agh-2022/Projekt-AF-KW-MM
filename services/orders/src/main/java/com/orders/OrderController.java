@@ -2,9 +2,7 @@ package com.orders;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,5 +15,10 @@ public class OrderController {
     @GetMapping("/orders")
     public ResponseEntity<List<Order>> getOrders() {
         return ResponseEntity.ok().body(orderService.getOrders());
+    }
+
+    @PostMapping("/orders")
+    public ResponseEntity<List<ProductDto>> createOrder(@RequestBody AddOrderDto addOrderDto) {
+        return ResponseEntity.status(201).body(orderService.addOrder(addOrderDto));
     }
 }

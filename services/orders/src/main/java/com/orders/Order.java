@@ -29,4 +29,26 @@ public class Order {
     private Date date;
 
     private String status;
+
+    public String address;
+
+    public Order(AddOrderDto addOrderDto) {
+        this.userId = addOrderDto.userId;
+        this.storeId = addOrderDto.storeId;
+        this.address = addOrderDto.address;
+        this.date = new Date();
+        this.status = "new";
+    }
+
+    public Order(AddOrderDto addOrderDto, List<ProductDto> products) {
+        this.userId = addOrderDto.userId;
+        this.storeId = addOrderDto.storeId;
+        this.address = addOrderDto.address;
+        this.date = new Date();
+        this.status = "new";
+    }
+
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+    }
 }
