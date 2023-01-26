@@ -48,6 +48,7 @@ jobs:
         uses: ./.github/actions/load-builds
       - run: docker compose build
       - run: docker compose up -d
+      - run: docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - run: docker compose push
 
   test-postman:
