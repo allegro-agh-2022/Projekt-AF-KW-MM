@@ -17,6 +17,16 @@ public class OrderController {
         return ResponseEntity.ok().body(orderService.getOrders());
     }
 
+    @GetMapping("/orders/{id}")
+    public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(orderService.getOrdersById(id));
+    }
+
+    @GetMapping("/orders/user/{id}")
+    public ResponseEntity<List<Order>> getOrdersByUserid(@PathVariable Long id) {
+        return ResponseEntity.ok().body(orderService.getOrdersByUserId(id));
+    }
+
     @PostMapping("/orders")
     public ResponseEntity<Order> createOrder(@RequestBody AddOrderDto addOrderDto) {
         return ResponseEntity.status(201).body(orderService.addOrder(addOrderDto));

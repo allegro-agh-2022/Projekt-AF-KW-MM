@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.products.categories.ProductCategory;
 import com.products.stores.Store;
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
