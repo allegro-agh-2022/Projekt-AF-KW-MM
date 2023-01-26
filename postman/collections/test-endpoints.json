@@ -365,7 +365,7 @@
 							"});\r",
 							"pm.test(\"Check if returned list is empty\", function () {\r",
 							"    const responseJson = pm.response.json()\r",
-							"    pm.expect(responseJson).to.have.lengthOf(0)\r",
+							"    pm.expect(responseJson).to.be.null\r",
 							"});\r",
 							""
 						],
@@ -381,25 +381,34 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base-url}}/{{stores-api-endpoint}}/{{store-id-runtime}}/products",
+					"raw": "{{base-url}}/{{stores-api-endpoint}}/{{store-id-runtime}}",
 					"host": [
 						"{{base-url}}"
 					],
 					"path": [
 						"{{stores-api-endpoint}}",
-						"{{store-id-runtime}}",
-						"products"
+						"{{store-id-runtime}}"
 					]
 				}
 			},
 			"response": []
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access-token}}",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "f25ae511-6098-4f4a-86e4-e09c64f9cc02",
+				"id": "c5dd1d6f-1832-47e0-b7f3-25b920909acf",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -409,7 +418,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "b2e58948-e052-4504-a851-0f0bc1292278",
+				"id": "3ff1f740-0057-44c6-ba34-52b6c007e1c1",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -419,7 +428,7 @@
 	],
 	"variable": [
 		{
-			"id": "c0973eb5-1aa9-4038-a8f4-218b3e5d04d2",
+			"id": "669465a0-66ac-41e8-acbb-63a84b8ffe0f",
 			"key": "base-url",
 			"value": "http://localhost",
 			"type": "string"
