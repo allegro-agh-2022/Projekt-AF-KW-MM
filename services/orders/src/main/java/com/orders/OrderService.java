@@ -23,10 +23,15 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-//    public List<Order> getOrdersByUserId(Long userId) {
-//        Optional<List<Order>> orders = orderRepository.findAllByUserId(userId);
-//        return orders.orElse(new ArrayList<>());  // return empty list if no orders found
-//    }
+    public Order getOrdersById(Long id) {
+        Optional<Order> order = orderRepository.findById(id);
+        return order.orElse(null);
+    }
+
+    public List<Order> getOrdersByUserId(Long userId) {
+        Optional<List<Order>> orders = orderRepository.findAllByUserId(userId);
+        return orders.orElse(new ArrayList<>());  // return empty list if no orders found
+    }
 
     @Transactional
     public Order addOrder(AddOrderDto addOrderDto) {
