@@ -13,8 +13,8 @@ import java.util.List;
 public class UsersController {
     private final UsersService usersService;
 
-    @PostMapping("/user")
-    public ResponseEntity<User> createUser(@RequestBody UserDto userDto) {
+    @PostMapping("/auth/register")
+    public ResponseEntity<User> register(@RequestBody UserDto userDto) {
         return ResponseEntity.status(201).body(usersService.createUser(userDto));
     }
 

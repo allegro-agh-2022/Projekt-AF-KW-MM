@@ -22,7 +22,7 @@ apiEndpoints:
     host: '*'
     paths: '/auth*'
   adminAPI:
-    host: 'localhost'
+    host: '*'
     paths: '/admin*'
 serviceEndpoints:
   consumer:
