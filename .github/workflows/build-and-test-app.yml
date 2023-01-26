@@ -39,7 +39,7 @@ jobs:
           name: ${{ matrix.Services }}
           token: ${{ secrets.SNYK_TOKEN_KERDAMON }}
 
-  build-images:
+  build-images-and-push:
     runs-on: ubuntu-latest
     needs: build-services
     steps:
@@ -48,11 +48,15 @@ jobs:
         uses: ./.github/actions/load-builds
       - run: docker compose build
       - run: docker compose up -d
+      - run: docker compose push
 
   test-postman:
     runs-on: ubuntu-latest
     needs: build-images
     steps:
+      - uses: actions/checkout@v3
+      - run: docker compose pull
+      - run: docker compose up -d
       - name: Install Postman CLI
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
