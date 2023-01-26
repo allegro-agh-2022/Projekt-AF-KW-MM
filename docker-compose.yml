@@ -35,8 +35,11 @@ services:
   products:
     build: ./services/products
     image: kerdamon/products
+    links:
+      - redis-server
     depends_on:
       - db-products
+      - redis-server
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db-products:5432/dwallegro-products
@@ -55,3 +58,9 @@ services:
       - consumer
       - producer
       - products
+
+  redis-server:
+    container_name: redis
+    image: 'redis'
+    ports:
+      - "6379:6379"

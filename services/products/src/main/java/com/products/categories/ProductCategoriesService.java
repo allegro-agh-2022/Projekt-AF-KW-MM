@@ -1,6 +1,7 @@
 package com.products.categories;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Optional;
 public class ProductCategoriesService {
     private final ProductCategoriesRepository categoriesRepository;
 
+    @Cacheable(value = "categories")
     public List<ProductCategory> getAllCategories() {
         return categoriesRepository.findAll();
     }

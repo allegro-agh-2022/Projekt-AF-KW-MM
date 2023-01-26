@@ -1,16 +1,18 @@
 package com.products.products;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.products.categories.ProductCategory;
 import com.products.stores.Store;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Table(name="products")
 @Entity
-@NoArgsConstructor
 @Data
-public class Product {
+public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -30,6 +32,11 @@ public class Product {
     @ManyToOne
     @JoinColumn(name="category_id", nullable=false)
     private ProductCategory category;
+
+    @JsonCreator
+    public Product() {
+        super();
+    }
 
     public Product(String name, double price, int stock) {
         this.name = name;
