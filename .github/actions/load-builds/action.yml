@@ -21,3 +21,9 @@ runs:
       with:
         name: build-folder-products
         path: services/products/build
+
+    - name: Load build folder of orders service
+      uses: actions/download-artifact@v3
+      with:
+        name: build-folder-orders
+        path: services/orders/build
