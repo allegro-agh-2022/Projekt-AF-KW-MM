@@ -19,7 +19,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     private long userId;
@@ -38,17 +38,5 @@ public class Order {
         this.address = addOrderDto.address;
         this.date = new Date();
         this.status = "new";
-    }
-
-    public Order(AddOrderDto addOrderDto, List<ProductDto> products) {
-        this.userId = addOrderDto.userId;
-        this.storeId = addOrderDto.storeId;
-        this.address = addOrderDto.address;
-        this.date = new Date();
-        this.status = "new";
-    }
-
-    public void addOrderItem(OrderItem orderItem) {
-        orderItems.add(orderItem);
     }
 }
