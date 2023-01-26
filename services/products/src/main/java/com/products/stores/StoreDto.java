@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 class StoreDto {
     public String name;
-    public String owner;
+    public Long ownerId;
 }

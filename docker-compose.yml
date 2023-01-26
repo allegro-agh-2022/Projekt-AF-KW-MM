@@ -1,11 +1,18 @@
 services:
 
-  db:
+  db-products:
     image: 'postgres:latest'
-    container_name: db
+    container_name: db-products
     environment:
-      - POSTGRES_USER=allegro
-      - POSTGRES_PASSWORD=allegro
+      - POSTGRES_USER=dwallegro-products
+      - POSTGRES_PASSWORD=dwallegro-products
+
+  db-orders:
+    image: 'postgres:latest'
+    container_name: db-orders
+    environment:
+      - POSTGRES_USER=dwallegro-orders
+      - POSTGRES_PASSWORD=dwallegro-orders
 
   rabbitmq:
     image: rabbitmq:3.7-management-alpine
@@ -35,13 +42,28 @@ services:
   products:
     build: ./services/products
     image: kerdamon/products
+    links:
+      - redis-server
     depends_on:
-      - db
+      - db-products
+      - redis-server
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/allegro
-      - SPRING_DATASOURCE_USERNAME=allegro
-      - SPRING_DATASOURCE_PASSWORD=allegro
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-products:5432/dwallegro-products
+      - SPRING_DATASOURCE_USERNAME=dwallegro-products
+      - SPRING_DATASOURCE_PASSWORD=dwallegro-products
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  orders:
+    build: ./services/orders
+    image: kerdamon/orders
+    depends_on:
+      - db-orders
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-orders:5432/dwallegro-orders
+      - SPRING_DATASOURCE_USERNAME=dwallegro-orders
+      - SPRING_DATASOURCE_PASSWORD=dwallegro-orders
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
   api-gateway:
@@ -50,8 +72,15 @@ services:
     image: kerdamon/api-gateway
     ports:
       # - "443:443"
-      - "80:80"
+      - "8080:80"
     depends_on:
       - consumer
       - producer
       - products
+      - orders
+
+  redis-server:
+    container_name: redis
+    image: 'redis'
+    ports:
+      - "6379:6379"
