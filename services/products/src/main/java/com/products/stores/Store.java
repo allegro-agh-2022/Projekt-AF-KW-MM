@@ -1,19 +1,21 @@
 package com.products.stores;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.products.products.Product;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.Data;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Table(name="stores")
 @Entity
-@NoArgsConstructor
 @Data
-public class Store {
+public class Store implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -25,6 +27,11 @@ public class Store {
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Product> products = new ArrayList<>();
+
+    @JsonCreator
+    public Store() {
+        super();
+    }
 
     public Store(String name, Long ownerId) {
         this.name = name;

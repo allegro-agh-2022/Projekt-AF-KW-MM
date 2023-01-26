@@ -3,6 +3,7 @@ package com.products.stores;
 import com.products.products.Product;
 import com.products.products.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class StoresService {
         storesRepository.deleteById(id);
     }
 
+    @Cacheable(value = "products", key = "#storeId")
     public List<Product> getStoreProducts(Long storeId) {
       return productService.getProductsByStoreId(storeId);
     }
