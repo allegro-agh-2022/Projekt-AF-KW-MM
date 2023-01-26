@@ -12,7 +12,7 @@ public class UsersService {
 
     private final UsersRepository usersRepository;
 
-    public Store createUser(UserDto userDto) {
+    public User createUser(UserDto userDto) {
         User user = new User(userDto);
         usersRepository.save(user);
 

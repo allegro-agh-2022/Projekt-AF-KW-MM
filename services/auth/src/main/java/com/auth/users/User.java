@@ -12,13 +12,15 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Data
-public class Utore {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
     private String surname;
     private String email;
+    private String client_id; //corresponds to app id from api gateway.
+    private String username;  //corresponds to username from api gateway
 
     public User(String name, String surname, String email) {
         this.name = name;
@@ -30,6 +32,6 @@ public class Utore {
         this.name = userDto.name;
         this.surname = userDto.surname;
         this.email = userDto.email;
+        this.username = userDto.username;
     }
 }
-

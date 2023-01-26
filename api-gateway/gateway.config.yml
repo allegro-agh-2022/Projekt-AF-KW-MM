@@ -20,10 +20,9 @@ apiEndpoints:
       - '/product-categories*'
   api4:
     host: '*'
-    paths:
-      - '/user*'
+    paths: '/auth*'
   adminAPI:
-    host: '*'
+    host: 'localhost'
     paths: '/admin*'
 serviceEndpoints:
   consumer:
