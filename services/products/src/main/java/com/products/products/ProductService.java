@@ -3,6 +3,7 @@ package com.products.products;
 import com.products.categories.ProductCategoriesService;
 import com.products.categories.ProductCategory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,10 +18,12 @@ public class ProductService {
 
     private final ProductCategoriesService categoriesService;
 
+    @Cacheable(value = "products")
     public List<Product> getProducts() {
         return productsRepository.findAll();
     }
 
+    @Cacheable(value = "products", key = "#categoryName")
     public List<Product> getProductsByCategory(String categoryName) {
         ProductCategory category = categoriesService.getCategoryByName(categoryName);
         return productsRepository.findAllByCategoryId(category.getId());

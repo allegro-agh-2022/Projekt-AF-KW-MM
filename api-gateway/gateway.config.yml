@@ -22,6 +22,9 @@ apiEndpoints:
     host: '*'
     paths:
       - '/orders*'
+  adminAPI:
+    host: '*'
+    paths: '/admin*'
 serviceEndpoints:
   consumer:
     url: 'http://consumer:8001'
@@ -31,6 +34,8 @@ serviceEndpoints:
     url: 'http://products:8003'
   orders:
     url: 'http://orders:8004'
+  adminBackend:
+    url: 'http://localhost:9876'
 policies:
   - basic-auth
   - cors
@@ -45,6 +50,7 @@ pipelines:
     apiEndpoints:
       - api1
     policies:
+      - oauth2:
       - proxy:
           - action:
               serviceEndpoint: consumer
@@ -65,7 +71,7 @@ pipelines:
           - action:
               serviceEndpoint: orders
               changeOrigin: true
-  service2:
+  producer:
     apiEndpoints:
       - api2
     policies:
@@ -73,3 +79,11 @@ pipelines:
           - action:
               serviceEndpoint: producer
               changeOrigin: true
+  admin:
+    apiEndpoints:
+      - adminAPI
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: adminBackend
+              stripPath: true
