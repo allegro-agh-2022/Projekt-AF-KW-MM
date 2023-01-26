@@ -1,1 +1,1 @@
-include 'producer', 'consumer', 'products', 'mailer'
+include 'producer', 'products', 'mailer'

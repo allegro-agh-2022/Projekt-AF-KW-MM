@@ -6,9 +6,6 @@ admin:
   port: 9876
   host: localhost
 apiEndpoints:
-  api1:
-    host: '*'
-    paths: '/consumer*'
   api2:
     host: '*'
     paths: '/producer*'
@@ -22,8 +19,6 @@ apiEndpoints:
     host: '*'
     paths: '/admin*'
 serviceEndpoints:
-  consumer:
-    url: 'http://consumer:8001'
   producer:
     url: 'http://producer:8002'
   products:
@@ -40,15 +35,6 @@ policies:
   - proxy
   - rate-limit
 pipelines:
-  consumer:
-    apiEndpoints:
-      - api1
-    policies:
-      - oauth2:
-      - proxy:
-          - action:
-              serviceEndpoint: consumer
-              changeOrigin: true
   products:
     apiEndpoints:
       - api3
